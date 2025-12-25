@@ -88,6 +88,30 @@ class DatabaseSeeder extends Seeder
             'notes' => 'Tunanetra, memerlukan pendamping untuk aktivitas luar.',
         ]);
 
+        $beneficiary3 = \App\Models\Beneficiary::create([
+            'guardian_id' => $guardian->id,
+            'name' => 'Ibu Aminah',
+            'disability_type' => 'Hearing Impairment',
+            'emergency_contact' => '081234567896',
+            'notes' => 'Komunikasi dengan bahasa isyarat',
+        ]);
+
+        $beneficiary4 = \App\Models\Beneficiary::create([
+            'guardian_id' => $guardian->id,
+            'name' => 'Pak Budi',
+            'disability_type' => 'Mobility Impairment',
+            'emergency_contact' => '081234567897',
+            'notes' => 'Bantuan berjalan dengan walker',
+        ]);
+
+        $beneficiary5 = \App\Models\Beneficiary::create([
+            'guardian_id' => $guardian->id,
+            'name' => 'Ibu Ratna',
+            'disability_type' => 'Cognitive Impairment',
+            'emergency_contact' => '081234567898',
+            'notes' => 'Pendampingan dan pengawasan konstan',
+        ]);
+
         // Create Sample Bookings
         $booking1 = \App\Models\Booking::create([
             'guardian_id' => $guardian->id,

@@ -1,50 +1,38 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="bg-gradient-to-r from-orange-500 to-orange-600 -mx-8 -mt-6 px-8 pt-6 pb-8">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h2 class="font-bold text-2xl text-white">
-                        Halo, {{ Auth::user()->name }} 👋
-                    </h2>
-                    <p class="text-orange-100 text-sm mt-1">Siap membantu hari ini</p>
-                </div>
-                @if($helperProfile)
-                <div class="bg-white/20 backdrop-blur-sm rounded-xl px-4 py-2 text-white text-center">
-                    <div class="text-xs opacity-90">Tier</div>
-                    <div class="font-bold">
-                        @if($helperProfile->tier == 'pro_care') Pro Care 🌟
-                        @else Buddy 👥 @endif
-                    </div>
-                    <div class="text-sm">⭐ {{ number_format($helperProfile->rating, 1) }}</div>
-                </div>
-                @endif
-            </div>
-        </div>
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            Dashboard Helper
+        </h2>
     </x-slot>
 
-    <div class="pb-12 bg-gray-50 min-h-screen">
+    <div class="py-12 bg-gray-50 min-h-screen">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
-            <!-- Stats Cards - Mobile Optimized -->
+            <!-- Welcome Stats -->
             @if($helperProfile)
-            <div class="px-4 sm:px-0 -mt-6 mb-6">
-                <div class="grid grid-cols-3 gap-3">
-                    <div class="bg-white rounded-xl shadow-sm p-4 text-center">
-                        <div class="text-2xl font-bold text-gray-900">{{ $completedCount }}</div>
-                        <div class="text-xs text-gray-600 mt-1">Jobs Done</div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-4 text-center">
-                        <div class="text-xl font-bold text-green-600">{{ number_format($totalEarnings / 1000, 0) }}K</div>
-                        <div class="text-xs text-gray-600 mt-1">Earnings</div>
-                    </div>
-                    <div class="bg-white rounded-xl shadow-sm p-4 text-center">
-                        <div class="text-2xl font-bold text-orange-600">{{ $pendingBookings->count() }}</div>
-                        <div class="text-xs text-gray-600 mt-1">Requests</div>
+            <div class="px-4 sm:px-0 mb-6">
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl shadow-lg p-6 text-white">
+                    <h3 class="text-2xl font-bold mb-1">Selamat Datang, {{ Auth::user()->name }}</h3>
+                    <p class="text-orange-100 text-sm mb-4">Siap membantu hari ini</p>
+                    
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center">
+                            <div class="text-2xl font-bold">{{ $completedCount }}</div>
+                            <div class="text-xs text-orange-100">Completed</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center">
+                            <div class="text-xl font-bold">{{ number_format($totalEarnings / 1000, 0) }}K</div>
+                            <div class="text-xs text-orange-100">Earnings</div>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-3 text-center">
+                            <div class="text-2xl font-bold">{{ $pendingBookings->count() }}</div>
+                            <div class="text-xs text-orange-100">Requests</div>
+                        </div>
                     </div>
                 </div>
             </div>
             @endif
-
+            
             <!-- Active Job Card -->
             @if($activeBooking)
             <div class="px-4 sm:px-0 mb-6">

@@ -5,10 +5,29 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BeneficiaryController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\SmartMatchController;
+use App\Http\Controllers\ChatbotController; // Added this line
 use Illuminate\Support\Facades\Route;
 
 // Landing Page
+// Landing Page
 Route::get('/', function () {
+    if (auth()->check()) {
+        $user = auth()->user();
+        // Fetch simple data for the homepage view if logged in
+        $activeBookings = \App\Models\Booking::where('guardian_id', $user->id)
+            ->whereIn('status', ['pending', 'accepted', 'in_progress'])
+            ->with(['beneficiary', 'helper'])
+            ->orderBy('scheduled_time', 'asc')
+            ->take(3)
+            ->get();
+            
+        $recentActivities = \App\Models\ActivityLog::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+
+        return view('welcome', compact('activeBookings', 'recentActivities'));
+    }
     return view('welcome');
 })->name('home');
 
@@ -44,6 +63,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/bookings/{id}/check-in', [BookingController::class, 'checkIn'])->name('bookings.checkIn');
     Route::post('/bookings/{id}/check-out', [BookingController::class, 'checkOut'])->name('bookings.checkOut');
     Route::post('/bookings/{id}/sos', [BookingController::class, 'sendSOS'])->name('bookings.sos');
+
+    // Chatbot AI
+    Route::post('/chatbot/send', [ChatbotController::class, 'sendMessage'])->name('chatbot.send');
+    Route::get('/chatbot', App\Livewire\Chatbot::class)->name('chatbot.index');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
