@@ -27,10 +27,10 @@
 
     <div class="bg-gray-50 min-h-screen">
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             
             <!-- Complete Profile Alert -->
-            <div class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-xl shadow-lg p-6 mb-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div class="bg-gradient-to-r from-orange-400 to-orange-500 rounded-xl shadow-lg p-6 mb-12 text-white flex flex-col md:flex-row items-center justify-between gap-6 relative z-40 -mt-20 overflow-hidden">
                 <!-- Background decorative circle -->
                 <div class="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 rounded-full bg-orange-300 opacity-20 blur-2xl"></div>
                 
